@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Zeta Clinic | Gaborone Specialized Medical Care</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --or:#F27121;
+  --gr:#8CC63F;
+  --grd:#5a8a28;
+  --ch:#2d3a2e;
+  --wh:#ffffff;
+  --mu:#6b7280;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none;background:#fff;color:var(--ch)}
+
+/* ═══ LOADER ════════════════════════════════════════ */
+#loader{
+  position:fixed;inset:0;z-index:10000;
+  background:#f0f0ee;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:18px;
+  transition:opacity .8s cubic-bezier(.25,.46,.45,.94), transform .8s cubic-bezier(.25,.46,.45,.94);
+}
+#loader.hide{opacity:0;transform:scale(1.04);pointer-events:none}
+.ld-icon{
+  width:76px;height:76px;border-radius:50%;
+  background:var(--or);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:visible;
+  animation:ldPulse 1.8s ease-in-out infinite;
+}
+.ld-icon::before{
+  content:'';position:absolute;inset:-12px;border-radius:50%;
+  background:radial-gradient(circle,rgba(242,113,33,.2) 0%,transparent 70%);
+  animation:ldGlow 1.8s ease-in-out infinite;
+}
+.ld-icon::after{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.3),transparent 70%);
+}
+.ld-icon img{width:42px;height:42px;object-fit:contain;position:relative;z-index:1;border-radius:0}
+@keyframes ldPulse{0%,100%{transform:scale(1);box-shadow:0 8px 28px rgba(242,113,33,.25)}50%{transform:scale(1.09);box-shadow:0 16px 44px rgba(242,113,33,.42)}}
+@keyframes ldGlow{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.18);opacity:1}}
+.ld-name{
+  font-weight:800;font-size:1.05rem;letter-spacing:.2em;
+  text-transform:uppercase;color:#2a2a2a;
+  opacity:0;animation:ldWord .6s .4s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+@keyframes ldWord{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.ld-bar{
+  position:absolute;bottom:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg,var(--or),var(--gr));
+  animation:ldBar 4.6s .2s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes ldBar{0%{width:0%}60%{width:75%}90%{width:95%}100%{width:100%}}
+
+/* ═══ CURSOR ════════════════════════════════════════ */
+#cur{
+  position:fixed;width:12px;height:12px;
+  background:#fff;border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  mix-blend-mode:difference;
+  transition:width .28s cubic-bezier(.34,1.56,.64,1),height .28s cubic-bezier(.34,1.56,.64,1);
+}
+#cur.big{width:50px;height:50px}
+
+/* ═══ NAV ═══════════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 48px;
+  pointer-events:none;
+  transition:background .4s,box-shadow .4s,padding .4s;
+}
+nav.sc{
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(18px);
+  box-shadow:0 2px 24px rgba(0,0,0,.07);
+  padding:12px 48px;
+  pointer-events:all;
+}
+nav.sc .lp{background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.08)}
+nav.sc .lp span{color:var(--ch)}
+nav.sc .nlw{background:transparent;border-color:transparent}
+nav.sc .nlw li a{color:var(--ch)}
+nav.sc .nlw li a.active{background:rgba(242,113,33,.12);color:var(--or)}
+nav.sc .nlw li a:hover{color:var(--or)}
+nav.sc .bkb{background:var(--or)}
+.lp,.nlw,.bkb,.ham{pointer-events:all}
+
+.lp{
+  display:flex;align-items:center;gap:10px;text-decoration:none;
+  background:rgba(0,0,0,.42);backdrop-filter:blur(14px);
+  border-radius:40px;padding:8px 20px 8px 8px;
+  border:1px solid rgba(255,255,255,.1);
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1),background .4s,box-shadow .3s;
+}
+.lp:hover{transform:scale(1.04) translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.2)}
+.li{
+  width:36px;height:36px;border-radius:50%;background:var(--or);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;flex-shrink:0;
+}
+.li::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.28),transparent 70%)}
+.li img{width:22px;height:22px;object-fit:contain;position:relative;z-index:1;border-radius:0}
+.lp span{color:#fff;font-weight:800;font-size:.9rem;letter-spacing:.1em;transition:color .4s}
+
+.nlw{
+  display:flex;align-items:center;list-style:none;
+  background:rgba(0,0,0,.42);backdrop-filter:blur(14px);
+  border-radius:40px;padding:5px 7px;gap:2px;
+  border:1px solid rgba(255,255,255,.08);
+  transition:background .4s;
+}
+.nlw li a{
+  text-decoration:none;color:rgba(255,255,255,.8);
+  font-size:.8rem;font-weight:700;letter-spacing:.08em;
+  padding:8px 18px;border-radius:30px;display:block;
+  transition:color .2s,background .3s cubic-bezier(.34,1.56,.64,1),transform .25s cubic-bezier(.34,1.56,.64,1);
+}
+.nlw li a:hover{color:#fff;transform:translateY(-1px)}
+.nlw li a.active{background:var(--gr);color:#fff}
+
+.bkb{
+  background:var(--or);color:#fff;text-decoration:none;
+  padding:10px 22px;border-radius:30px;
+  font-size:.78rem;font-weight:800;letter-spacing:.06em;
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;
+  box-shadow:0 4px 18px rgba(242,113,33,.4);
+}
+.bkb:hover{transform:scale(1.06) translateY(-2px);box-shadow:0 10px 30px rgba(242,113,33,.5)}
+
+/* hamburger */
+.ham{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  width:40px;height:40px;
+  background:rgba(0,0,0,.42);backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.12);border-radius:12px;
+  cursor:none;padding:10px;pointer-events:all;
+  transition:background .3s;
+}
+nav.sc .ham{background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.1)}
+.ham span{
+  display:block;width:100%;height:2px;background:#fff;
+  border-radius:2px;
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .3s,background .3s;
+  transform-origin:center;
+}
+nav.sc .ham span{background:var(--ch)}
+.ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.ham.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* mobile drawer */
+.mob-menu{
+  display:none;position:fixed;inset:0;z-index:400;
+  background:rgba(18,32,18,.97);backdrop-filter:blur(20px);
+  flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  opacity:0;transform:scale(1.04);
+  transition:opacity .4s cubic-bezier(.25,.46,.45,.94),transform .4s cubic-bezier(.34,1.56,.64,1);
+  pointer-events:none;
+}
+.mob-menu.open{opacity:1;transform:scale(1);pointer-events:all}
+.mob-menu .ml{
+  display:block;text-decoration:none;color:rgba(255,255,255,.55);
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:3rem;font-weight:900;letter-spacing:.04em;
+  text-transform:uppercase;line-height:1;padding:10px 0;
+  opacity:0;transform:translateY(20px);
+  transition:color .25s,transform .3s cubic-bezier(.34,1.56,.64,1),opacity .4s,transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+.mob-menu.open .ml{opacity:1;transform:translateY(0)}
+.mob-menu.open .ml:nth-child(1){transition-delay:.06s}
+.mob-menu.open .ml:nth-child(2){transition-delay:.12s}
+.mob-menu.open .ml:nth-child(3){transition-delay:.18s}
+.mob-menu.open .ml:nth-child(4){transition-delay:.24s}
+.mob-menu.open .ml:nth-child(5){transition-delay:.30s}
+.mob-menu .ml:hover{color:var(--or)}
+.mob-menu .ml.active{color:var(--gr)}
+.mob-menu .mbk{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--or);color:#fff !important;
+  padding:15px 38px;border-radius:50px;
+  font-size:1rem !important;margin-top:18px;
+  box-shadow:0 8px 28px rgba(242,113,33,.4);
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1) !important;
+}
+.mob-menu .mbk:hover{transform:scale(1.06) translateY(-2px) !important}
+
+/* ═══ SECTIONS ══════════════════════════════════════ */
+.fs{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.sb{position:absolute;inset:0;background-size:cover;background-position:center;animation:sZoom 20s ease-in-out infinite alternate}
+@keyframes sZoom{from{transform:scale(1)}to{transform:scale(1.07)}}
+.so{position:absolute;inset:0}
+.grn{
+  position:absolute;inset:0;opacity:.05;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px 200px;animation:grn .12s steps(1) infinite;
+}
+@keyframes grn{0%{background-position:0 0}25%{background-position:-40px 20px}50%{background-position:20px -35px}75%{background-position:-20px 40px}}
+
+/* blobs */
+.blob{position:absolute;border-radius:50%;pointer-events:none}
+#home .bOL{width:200px;height:220px;background:rgba(200,60,10,.65);left:-40px;bottom:80px;border-radius:60% 40% 55% 45%}
+#home .bOB{width:160px;height:160px;background:rgba(200,60,10,.55);left:60px;bottom:-20px}
+#home .bGT{width:270px;height:280px;background:rgba(140,198,63,.72);right:-30px;top:80px}
+#home .bGM{width:230px;height:230px;background:rgba(140,198,63,.65);right:100px;top:340px}
+#services .bCL{width:200px;height:200px;background:rgba(255,255,255,.1);left:-60px;bottom:60px}
+#services .bCL2{width:140px;height:140px;background:rgba(255,255,255,.07);left:80px;bottom:-30px}
+#team .bOT{width:280px;height:200px;background:rgba(242,113,33,.75);right:-20px;top:120px;border-radius:40% 60% 50% 50%}
+#team .bOM{width:200px;height:200px;background:rgba(242,113,33,.6);right:60px;top:340px}
+#team .bTT{width:160px;height:180px;background:rgba(100,160,140,.5);right:100px;top:180px;border-radius:45% 55% 60% 40%}
+
+/* ═══ HOME ══════════════════════════════════════════ */
+#home .sb{background-image:url('https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=1800&q=85');background-position:center top}
+#home .so{background:linear-gradient(135deg,rgba(220,80,15,.80) 0%,rgba(195,60,12,.70) 40%,rgba(160,44,8,.62) 100%)}
+
+.hi{
+  position:relative;z-index:3;width:100%;
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;
+  padding:140px 40px 100px;gap:28px;
+}
+.hi h1{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(4rem,9.5vw,7.8rem);font-weight:900;
+  color:#fff;line-height:.92;text-transform:uppercase;
+  text-shadow:0 4px 40px rgba(0,0,0,.22);
+}
+.hi h1 .w{
+  display:inline-block;
+  opacity:0;transform:translateY(52px) rotate(2deg);
+  animation:wIn .7s cubic-bezier(.34,1.56,.64,1) forwards;
+  animation-play-state:paused;
+}
+.hi h1 .w:nth-child(1){animation-delay:.06s}
+.hi h1 .w:nth-child(2){animation-delay:.20s}
+.hi h1 .w:nth-child(3){animation-delay:.34s}
+.hi h1 .w:nth-child(4){animation-delay:.48s}
+@keyframes wIn{to{opacity:1;transform:translateY(0) rotate(0)}}
+
+.hpill{
+  background:rgba(140,198,63,.52);backdrop-filter:blur(14px) saturate(1.5);
+  border-radius:50px;padding:16px 44px;
+  color:#fff;font-size:1.02rem;max-width:520px;line-height:1.7;
+  border:1px solid rgba(255,255,255,.18);
+  opacity:0;transform:translateY(20px);
+  animation:upIn .7s .66s cubic-bezier(.34,1.56,.64,1) forwards;
+  animation-play-state:paused;
+}
+.hcta{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--gr);color:#fff;text-decoration:none;
+  padding:20px 58px;border-radius:50px;
+  font-size:1.05rem;font-weight:800;letter-spacing:.08em;
+  position:relative;overflow:hidden;cursor:none;
+  box-shadow:0 8px 32px rgba(140,198,63,.45);
+  opacity:0;transform:translateY(20px);
+  animation:upIn .7s .86s cubic-bezier(.34,1.56,.64,1) forwards;
+  animation-play-state:paused;
+  transition:transform .38s cubic-bezier(.34,1.56,.64,1),box-shadow .32s;
+}
+.hcta::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.18),transparent 60%)}
+.hcta:hover{transform:scale(1.07) translateY(-3px);box-shadow:0 18px 48px rgba(140,198,63,.55)}
+.hcta .arr{transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
+.hcta:hover .arr{transform:translateX(6px)}
+.hcta::after{content:'';position:absolute;inset:-5px;border-radius:60px;border:2px solid rgba(140,198,63,.5);opacity:0;animation:pring 2.5s 2s ease-out infinite}
+@keyframes pring{0%{transform:scale(.93);opacity:.5}100%{transform:scale(1.15);opacity:0}}
+@keyframes upIn{to{opacity:1;transform:translateY(0)}}
+
+.shr{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;animation:fdi .5s 1.6s forwards}
+@keyframes fdi{to{opacity:.5}}
+.shr span{color:#fff;font-size:.62rem;letter-spacing:.2em;font-weight:700;text-transform:uppercase}
+.sph{width:22px;height:36px;border:2px solid rgba(255,255,255,.5);border-radius:12px;display:flex;justify-content:center;padding-top:6px}
+.sph::after{content:'';width:4px;height:8px;background:#fff;border-radius:2px;animation:sdt 1.7s ease-in-out infinite}
+@keyframes sdt{0%,100%{transform:translateY(0);opacity:1}80%{transform:translateY(10px);opacity:0}}
+
+/* ═══ SERVICES ══════════════════════════════════════ */
+#services .sb{background-image:url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1800&q=85');filter:brightness(.42) saturate(.55)}
+#services .so{background:linear-gradient(135deg,rgba(18,42,28,.78) 0%,rgba(24,52,35,.60) 55%,rgba(30,60,40,.50) 100%)}
+
+.svi{
+  position:relative;z-index:3;width:100%;
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;padding:120px 8% 80px;gap:56px;
+}
+.svl{display:flex;flex-direction:column;gap:14px}
+
+.sc2{
+  background:rgba(80,130,40,.72);backdrop-filter:blur(12px) saturate(1.3);
+  border-radius:16px;padding:18px 22px;cursor:none;
+  border-left:4px solid rgba(255,255,255,.12);
+  border-top:1px solid rgba(255,255,255,.1);
+  position:relative;overflow:hidden;
+  opacity:0;transform:translateX(-32px);
+  transition:background .4s cubic-bezier(.25,.46,.45,.94),border-color .3s,box-shadow .4s;
+}
+.sc2.entered{opacity:1 !important;transform:translateX(0) !important}
+.sc2::before{
+  content:'';position:absolute;top:0;left:-120%;width:80%;height:100%;
+  background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.13) 50%,transparent 60%);
+  transition:left .55s cubic-bezier(.25,.46,.45,.94);pointer-events:none;
+}
+.sc2:hover::before,.sc2.active::before{left:140%}
+.sc2:hover,.sc2.active{
+  background:rgba(110,160,50,.92);border-left-color:var(--or);
+  transform:translateX(10px) scale(1.01) !important;
+  box-shadow:0 8px 32px rgba(0,0,0,.26),4px 0 0 var(--or);
+}
+.sc2 h3{color:var(--gr);font-size:1.1rem;font-weight:800;margin-bottom:5px;transition:letter-spacing .3s,color .3s}
+.sc2:hover h3,.sc2.active h3{letter-spacing:.02em;color:#fff}
+.sc2 p{color:rgba(255,255,255,.88);font-size:.9rem;line-height:1.55}
+
+.svv{
+  display:flex;flex-direction:column;gap:14px;
+  opacity:0;transform:translateX(30px);
+  transition:opacity .65s .3s cubic-bezier(.25,.46,.45,.94),transform .65s .3s cubic-bezier(.34,1.56,.64,1);
+}
+.svv.entered{opacity:1;transform:translateX(0)}
+.siw{border-radius:20px;overflow:hidden;height:340px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+.siw::after{content:'';position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);border-radius:20px;pointer-events:none;z-index:2}
+.siw img{
+  width:100%;height:100%;object-fit:cover;
+  position:absolute;inset:0;will-change:opacity,transform;
+  transition:opacity .58s cubic-bezier(.25,.46,.45,.94),transform .72s cubic-bezier(.25,.46,.45,.94);
+}
+.siw img.hidden{opacity:0;transform:scale(1.07) translateY(10px);z-index:0}
+.siw img.visible{opacity:1;transform:scale(1) translateY(0);z-index:1}
+.sdc{
+  background:rgba(140,198,63,.44);backdrop-filter:blur(14px) saturate(1.5);
+  border-radius:16px;padding:18px 24px;
+  color:#fff;font-size:.91rem;line-height:1.68;min-height:82px;
+  border:1px solid rgba(255,255,255,.15);border-top:1px solid rgba(255,255,255,.24);
+  transition:opacity .3s cubic-bezier(.25,.46,.45,.94),transform .35s cubic-bezier(.34,1.56,.64,1);
+}
+.sdc.fading{opacity:0;transform:translateY(7px)}
+
+/* ═══ TEAM ══════════════════════════════════════════ */
+#team .sb{background-image:url('https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=1800&q=85');background-position:center right}
+#team .so{background:linear-gradient(100deg,rgba(230,100,20,.72) 0%,rgba(210,80,15,.60) 45%,rgba(160,50,10,.45) 100%)}
+
+.ti{position:relative;z-index:3;width:100%;padding:120px 8% 80px;display:flex;flex-direction:column}
+.th{max-width:460px;margin-bottom:56px}
+.th h2{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(2.8rem,6vw,4.2rem);font-weight:900;
+  color:var(--ch);line-height:1;
+  opacity:0;transform:translateX(-28px);
+  transition:opacity .7s .1s cubic-bezier(.25,.46,.45,.94),transform .7s .1s cubic-bezier(.34,1.56,.64,1);
+}
+.th h2.in{opacity:1;transform:translateX(0)}
+.th p{
+  color:var(--ch);font-size:1rem;line-height:1.6;margin-top:14px;
+  opacity:0;transform:translateX(-22px);
+  transition:opacity .7s .22s cubic-bezier(.25,.46,.45,.94),transform .7s .22s cubic-bezier(.34,1.56,.64,1);
+}
+.th p.in{opacity:1;transform:translateX(0)}
+
+.tg{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:end}
+
+.dc{
+  border-radius:22px;overflow:hidden;cursor:none;position:relative;
+  background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.28);
+  opacity:0;transform:translateY(44px);
+  transition:opacity .65s cubic-bezier(.25,.46,.45,.94),transform .65s cubic-bezier(.34,1.56,.64,1),box-shadow .5s cubic-bezier(.25,.46,.45,.94);
+  will-change:transform;
+}
+.dc.in{opacity:1;transform:translateY(0)}
+.dc:hover{transform:translateY(-18px) scale(1.03);box-shadow:0 36px 70px rgba(0,0,0,.38),0 0 0 3px rgba(140,198,63,.35)}
+.dc.feat.in{transform:translateY(-30px)}
+.dc.feat.in:hover{transform:translateY(-46px) scale(1.03)}
+.dc.feat::before{
+  content:'';position:absolute;top:-28px;left:-10%;width:120%;height:80px;
+  background:var(--or);border-radius:50% 50% 0 0 / 100% 100% 0 0;
+  z-index:4;transition:top .55s cubic-bezier(.34,1.56,.64,1);
+}
+.dc.feat:hover::before{top:-38px}
+.dp{
+  width:100%;aspect-ratio:3/4;object-fit:cover;display:block;
+  transform-origin:center bottom;
+  transition:transform .65s cubic-bezier(.34,1.56,.64,1);will-change:transform;
+}
+.dc:hover .dp{transform:scale(1.1)}
+.di{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(60,105,20,.97) 0%,rgba(80,130,28,.82) 40%,rgba(100,155,38,.35) 68%,transparent 100%);
+  backdrop-filter:blur(3px);padding:44px 18px 16px;
+  transition:padding .45s cubic-bezier(.34,1.56,.64,1);
+}
+.dc:hover .di{padding:56px 18px 20px}
+.di .dn{color:#fff;font-size:.84rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;line-height:1.3;margin-bottom:4px;text-shadow:0 1px 12px rgba(0,0,0,.5)}
+.di .dr{color:rgba(255,255,255,.90);font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+
+/* ═══ BOOKING ═══════════════════════════════════════ */
+#bk{
+  background:linear-gradient(135deg,#1a1a1a 0%,#2d1a0e 50%,#1a1a1a 100%);
+  padding:110px 8%;display:flex;align-items:center;
+  justify-content:space-between;gap:60px;flex-wrap:wrap;
+  position:relative;overflow:hidden;
+}
+#bk::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(220,80,20,.18) 0%,transparent 55%,rgba(140,198,63,.1) 100%)}
+.bkt{flex:1;min-width:280px;position:relative;z-index:1}
+.bkl{font-size:.72rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--gr);margin-bottom:10px}
+.bkh{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:900;color:#fff;line-height:1;text-transform:uppercase;margin-bottom:14px}
+.bks{color:rgba(255,255,255,.6);font-size:1rem;line-height:1.7;max-width:440px}
+.hrs{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap}
+.hb{background:rgba(255,255,255,.07);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px 20px}
+.hb .dy{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:4px}
+.hb .tm{color:#fff;font-size:.95rem;font-weight:700}
+.bka{position:relative;z-index:1;flex-shrink:0}
+.bkbtn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--or);color:#fff;text-decoration:none;
+  padding:20px 54px;border-radius:50px;
+  font-size:1.05rem;font-weight:800;letter-spacing:.07em;
+  position:relative;overflow:hidden;cursor:none;
+  box-shadow:0 10px 36px rgba(242,113,33,.45);
+  transition:transform .38s cubic-bezier(.34,1.56,.64,1),box-shadow .32s;
+}
+.bkbtn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.18),transparent 60%)}
+.bkbtn:hover{transform:scale(1.07) translateY(-3px);box-shadow:0 18px 48px rgba(242,113,33,.55)}
+.bkbtn .arr{transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
+.bkbtn:hover .arr{transform:translateX(5px)}
+.bkbtn::after{content:'';position:absolute;inset:-5px;border-radius:60px;border:2px solid rgba(242,113,33,.5);opacity:0;animation:pring2 2.8s 1.5s ease-out infinite}
+@keyframes pring2{0%{transform:scale(.94);opacity:.5}100%{transform:scale(1.15);opacity:0}}
+
+/* ═══ FOOTER ════════════════════════════════════════ */
+footer{background:#111;padding:80px 8% 40px}
+.ftp{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:50px;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,.08)}
+.fbr p{color:rgba(255,255,255,.42);font-size:.88rem;line-height:1.7;max-width:280px;margin-top:16px}
+.fc h5{color:var(--or);font-size:.72rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;margin-bottom:18px}
+.fc a,.fc p{color:rgba(255,255,255,.48);text-decoration:none;font-size:.88rem;line-height:1.6;display:block;margin-bottom:10px;transition:color .25s}
+.fc a:hover{color:var(--gr)}
+.fb{padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.fb p{color:rgba(255,255,255,.28);font-size:.78rem}
+.fb a{color:rgba(255,255,255,.28);text-decoration:none;font-size:.78rem;transition:color .2s}
+.fb a:hover{color:var(--or)}
+
+/* ═══ MODAL ═════════════════════════════════════════ */
+.mo{
+  display:none;position:fixed;inset:0;z-index:800;
+  background:rgba(0,0,0,.65);backdrop-filter:blur(8px);
+  align-items:center;justify-content:center;padding:20px;
+}
+.mo.open{display:flex}
+.mb{
+  background:#fff;border-radius:28px;
+  width:100%;max-width:580px;padding:48px;
+  position:relative;animation:mIn .42s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes mIn{from{transform:translateY(60px) scale(.96);opacity:0}to{transform:none;opacity:1}}
+.mc{position:absolute;top:20px;right:24px;font-size:1.6rem;cursor:none;color:#aaa;background:none;border:none;line-height:1;transition:color .2s,transform .3s cubic-bezier(.34,1.56,.64,1)}
+.mc:hover{color:var(--ch);transform:rotate(90deg)}
+.mn{color:var(--or);font-size:1.5rem;font-weight:800;margin-bottom:4px}
+.mr{color:var(--grd);font-size:.9rem;font-weight:700;margin-bottom:20px}
+.mbi{color:#555;line-height:1.75;font-size:.95rem}
+.ma{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--or);color:#fff;text-decoration:none;
+  padding:14px 32px;border-radius:40px;font-weight:800;font-size:.92rem;
+  margin-top:28px;cursor:none;
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;
+  box-shadow:0 8px 24px rgba(242,113,33,.35);
+}
+.ma:hover{transform:scale(1.05) translateY(-2px);box-shadow:0 14px 36px rgba(242,113,33,.48)}
+
+/* reveal util */
+.rev{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.34,1.56,.64,1)}
+.rev.in{opacity:1;transform:translateY(0)}
+.revL{opacity:0;transform:translateX(-30px);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.34,1.56,.64,1)}
+.revL.in{opacity:1;transform:translateX(0)}
+.revR{opacity:0;transform:translateX(30px);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.34,1.56,.64,1)}
+.revR.in{opacity:1;transform:translateX(0)}
+
+/* ═══ MOBILE ════════════════════════════════════════ */
+@media(max-width:768px){
+  #cur{display:none}
+  body{cursor:auto}
+  .fs{min-height:100svh}
+  nav{padding:14px 18px}
+  nav.sc{padding:10px 18px}
+  .nlw,.bkb{display:none}
+  .ham{display:flex}
+
+  /* home */
+  .hi{padding:105px 20px 72px;gap:18px}
+  .hi h1{font-size:clamp(2.9rem,13.5vw,4.6rem)}
+  .hpill{font-size:.9rem;padding:13px 22px;max-width:100%;border-radius:16px}
+  .hpill br{display:none}
+  .hcta{padding:15px 36px;font-size:.92rem;width:100%;max-width:300px;justify-content:center}
+  #home .bGT{width:110px;height:110px;right:-14px;top:48px}
+  #home .bGM{width:80px;height:80px;right:22px;top:170px}
+  #home .bOL{width:90px;height:100px;left:-16px;bottom:52px}
+  #home .bOB{width:65px;height:65px;left:42px;bottom:-6px}
+  .shr{display:none}
+
+  /* services */
+  .svi{display:flex;flex-direction:column;padding:90px 20px 52px;gap:14px}
+  .svv{display:flex !important;flex-direction:column;order:-1;opacity:1 !important;transform:none !important;transition:none !important}
+  .siw{height:210px;border-radius:14px}
+  .sdc{font-size:.84rem;padding:12px 16px;min-height:auto;border-radius:12px}
+  .svl{gap:9px}
+  .sc2{padding:13px 15px;border-radius:12px}
+  .sc2 h3{font-size:.96rem;margin-bottom:2px}
+  .sc2 p{font-size:.82rem;line-height:1.45}
+  #services .bCL{width:100px;height:100px;left:-36px;bottom:36px}
+  #services .bCL2{width:70px;height:70px;left:44px;bottom:-18px}
+
+  /* team */
+  #team .sb{background-position:68% center}
+  .ti{padding:90px 20px 52px}
+  .th{margin-bottom:24px;max-width:100%}
+  .th h2{font-size:clamp(2rem,8.5vw,2.6rem)}
+  .th p{font-size:.88rem;margin-top:8px}
+  .tg{grid-template-columns:1fr 1fr;gap:11px;align-items:start}
+  .dc.feat.in{transform:translateY(0) !important}
+  .dc.feat.in:hover{transform:translateY(-10px) scale(1.02) !important}
+  .dc.in:hover{transform:translateY(-10px) scale(1.02)}
+  .dc.feat::before{height:50px;top:-16px}
+  .dc.feat:hover::before{top:-22px}
+  .dp{aspect-ratio:2/3}
+  .di{padding:32px 11px 11px}
+  .dc:hover .di{padding:40px 11px 14px}
+  .di .dn{font-size:.68rem;letter-spacing:.03em;line-height:1.2}
+  .di .dr{font-size:.62rem;letter-spacing:.06em}
+  #team .bOT{width:110px;height:82px;right:-8px;top:64px}
+  #team .bOM{width:78px;height:78px;right:18px;top:162px}
+  #team .bTT{width:60px;height:68px;right:36px;top:95px}
+
+  /* booking */
+  #bk{flex-direction:column;text-align:center;padding:72px 20px;gap:32px}
+  .bkh{font-size:clamp(1.9rem,9vw,2.6rem)}
+  .bks{max-width:100%;font-size:.92rem}
+  .hrs{justify-content:center;gap:10px}
+  .hb{flex:1;min-width:120px;text-align:center;padding:12px 14px}
+  .hb .tm{font-size:.88rem}
+  .bkbtn{padding:15px 36px;font-size:.92rem;width:100%;max-width:290px;justify-content:center}
+
+  /* footer */
+  footer{padding:52px 20px 28px}
+  .ftp{grid-template-columns:1fr;gap:28px;padding-bottom:32px}
+  .fbr p{max-width:100%}
+  .fb{flex-direction:column;text-align:center;gap:5px}
+
+  /* modal — bottom sheet */
+  .mo{align-items:flex-end;padding:0}
+  .mb{border-radius:24px 24px 0 0;padding:32px 22px 36px;max-width:100%;max-height:88svh;overflow-y:auto;animation:mInM .42s cubic-bezier(.34,1.56,.64,1) both}
+  @keyframes mInM{from{transform:translateY(100%);opacity:0}to{transform:none;opacity:1}}
+  .mc{top:16px;right:18px;font-size:1.5rem}
+  .mn{font-size:1.2rem;padding-right:28px}
+  .mbi{font-size:.87rem}
+  .ma{width:100%;justify-content:center;padding:13px 22px}
+}
+@media(min-width:481px) and (max-width:768px){
+  .siw{height:250px}
+  .di .dn{font-size:.74rem}
+  .di .dr{font-size:.66rem}
+}
+@media(max-width:380px){
+  .hi h1{font-size:2.45rem}
+  .hpill{font-size:.83rem;padding:11px 18px}
+  .tg{gap:8px}
+  .di .dn{font-size:.62rem}
+  .di .dr{font-size:.57rem}
+  .di{padding:26px 9px 9px}
+  .sc2 h3{font-size:.9rem}
+  .bkh{font-size:1.85rem}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="ld-icon">
+    <img src="https://avatar.setmore.com/files/public/f89uJzexoMCn/profilepic.png?format=png" alt="Zeta Clinic"/>
+  </div>
+  <div class="ld-name">ZETA CLINIC</div>
+  <div class="ld-bar"></div>
+</div>
+
+<div id="cur"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#home" class="lp" data-h>
+    <div class="li"><img src="https://avatar.setmore.com/files/public/f89uJzexoMCn/profilepic.png?format=png" alt="Z"/></div>
+    <span>ZETA CLINIC</span>
+  </a>
+  <ul class="nlw">
+    <li><a href="#home"     class="active" id="nl-home"  data-h>HOME</a></li>
+    <li><a href="#services"              id="nl-svc"    data-h>SERVICES</a></li>
+    <li><a href="#team"                  id="nl-team"   data-h>SPECIALISTS</a></li>
+    <li><a href="#contact"               id="nl-con"    data-h>CONTACT</a></li>
+  </ul>
+  <a href="https://zetaclinic.setmore.com/book" class="bkb" data-h target="_blank">BOOK NOW</a>
+  <button class="ham" id="ham"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <a href="#home"     class="ml active" id="mm-home">HOME</a>
+  <a href="#services" class="ml"        id="mm-svc">SERVICES</a>
+  <a href="#team"     class="ml"        id="mm-team">SPECIALISTS</a>
+  <a href="#contact"  class="ml"        id="mm-con">CONTACT</a>
+  <a href="https://zetaclinic.setmore.com/book" class="ml mbk" target="_blank">BOOK NOW ›</a>
+</div>
+
+<!-- ══ HOME ══════════════════════════════════════════ -->
+<section class="fs" id="home">
+  <div class="sb"></div><div class="so"></div><div class="grn"></div>
+  <div class="blob bOL"></div><div class="blob bOB"></div>
+  <div class="blob bGT"></div><div class="blob bGM"></div>
+  <div class="hi">
+    <h1><span class="w">GET&nbsp;</span><span class="w">QUICK</span><br><span class="w">SPECIALIZED&nbsp;</span><span class="w">CARE</span></h1>
+    <p class="hpill">Providing expert Physiotherapy, Dental, Psychiatry,<br>and Ultrasound services in Gaborone CBD.</p>
+    <a href="#services" class="hcta" data-h>OUR SERVICES <span class="arr">›</span></a>
+  </div>
+  <div class="shr"><div class="sph"></div><span>Scroll</span></div>
+</section>
+
+<!-- ══ SERVICES ══════════════════════════════════════ -->
+<section class="fs" id="services">
+  <div class="sb"></div><div class="so"></div><div class="grn"></div>
+  <div class="blob bCL"></div><div class="blob bCL2"></div>
+  <div class="svi">
+    <div class="svl">
+      <div class="sc2 active" data-idx="0" data-desc="Our physiotherapy team specialises in Sports Massage, Dry Needling, and Shock Wave Therapy — helping you recover faster and move better.">
+        <h3>Physiotherapy</h3><p>Sports Massage, Dry Needling,<br>and Shock Wave Therapy.</p>
+      </div>
+      <div class="sc2" data-idx="1" data-desc="Comprehensive psychiatric evaluations and professional mental health support in a safe, confidential environment for all ages.">
+        <h3>Psychiatry</h3><p>Comprehensive psychiatric evaluations<br>and professional mental health support.</p>
+      </div>
+      <div class="sc2" data-idx="2" data-desc="Expert dental consultations and specialised oral health evaluations, from routine checkups to advanced restorative procedures.">
+        <h3>Dental</h3><p>Expert dental consultations and<br>specialised oral health evaluations.</p>
+      </div>
+      <div class="sc2" data-idx="3" data-desc="Professional diagnostic imaging and ultrasound medical consultations delivered by experienced radiologists using state-of-the-art equipment.">
+        <h3>Ultrasound</h3><p>Professional diagnostic imaging and<br>ultrasound medical consultations.</p>
+      </div>
+    </div>
+    <div class="svv" id="svv">
+      <div class="siw">
+        <img class="visible" src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1000&q=85" alt="Physiotherapy"/>
+        <img class="hidden"  src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=1000&q=85" alt="Psychiatry"/>
+        <img class="hidden"  src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=1000&q=85" alt="Dental"/>
+        <img class="hidden"  src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1000&q=85" alt="Ultrasound"/>
+      </div>
+      <div class="sdc" id="sdc">Our physiotherapy team specialises in Sports Massage, Dry Needling, and Shock Wave Therapy — helping you recover faster and move better.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TEAM ═══════════════════════════════════════════ -->
+<section class="fs" id="team">
+  <div class="sb"></div><div class="so"></div><div class="grn"></div>
+  <div class="blob bOT"></div><div class="blob bOM"></div><div class="blob bTT"></div>
+  <div class="ti">
+    <div class="th">
+      <h2 id="th2">Meet Our<br>Specialists</h2>
+      <p id="thp">Click on any specialist to<br>read their full professional profile.</p>
+    </div>
+    <div class="tg">
+      <div class="dc" onclick="openM('victor')">
+        <img class="dp" src="http://file.garden/ab7plFUtJR_vAmJv/3.png" alt="Victor Malindi"/>
+        <div class="di"><div class="dn">Victor S. Malindi</div><div class="dr">Ultrasonographer</div></div>
+      </div>
+     <div class="dc" onclick="openM('passmore')">
+        <img class="dp" src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&q=80&fit=crop&crop=face" alt="Passmore"/>
+        <div class="di"><div class="dn">Passmore Shambahweta</div><div class="dr">Physiotherapist</div></div>
+      </div>
+      <div class="dc" onclick="openM('mpho')">
+        <img class="dp" src="https://avatar.anywhere.app/files/img/fS1xoifc99uO/profilepic.png" alt="Mpho Thula"/>
+        <div class="di"><div class="dn">Mpho Abel Thula</div><div class="dr">Psychiatrist</div></div>
+      </div>
+      <div class="dc" onclick="openM('passmore')">
+        <img class="dp" src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&q=80&fit=crop&crop=face" alt="Passmore"/>
+        <div class="di"><div class="dn">Passmore Shambahweta</div><div class="dr">Physiotherapist</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BOOKING ════════════════════════════════════════ -->
+<div id="bk">
+  <div class="bkt revL">
+    <p class="bkl">Ready When You Are</p>
+    <h2 class="bkh">Book Your<br>Appointment</h2>
+    <p class="bks">Same-week appointments available. Walk-ins welcome during clinic hours.</p>
+    <div class="hrs">
+      <div class="hb"><div class="dy">Mon – Fri</div><div class="tm">8:00 AM – 8:00 PM</div></div>
+      <div class="hb"><div class="dy">Sat – Sun</div><div class="tm">9:00 AM – 4:00 PM</div></div>
+    </div>
+  </div>
+  <div class="bka revR" style="transition-delay:.2s">
+    <a href="https://zetaclinic.setmore.com/book" class="bkbtn" data-h target="_blank">Book Now <span class="arr">›</span></a>
+  </div>
+</div>
+
+<!-- ══ FOOTER ═════════════════════════════════════════ -->
+<footer id="contact">
+  <div class="ftp">
+    <div class="fbr">
+      <a href="#home" class="lp" data-h style="display:inline-flex">
+        <div class="li"><img src="https://avatar.setmore.com/files/public/f89uJzexoMCn/profilepic.png?format=png" alt="Z"/></div>
+        <span>ZETA CLINIC</span>
+      </a>
+      <p>Expert specialized medical care in the heart of Gaborone CBD. Physiotherapy, Psychiatry, Dental, and Ultrasound — all in one place.</p>
+    </div>
+    <div class="fc">
+      <h5>Location</h5>
+      <p>Unit 5 Matante Mews<br>Plot 54373, Western Commercial Rd<br>Gaborone CBD, Botswana</p>
+    </div>
+    <div class="fc">
+      <h5>Reach Out</h5>
+      <a href="tel:+26772928725" data-h>📞 +267 72 928 725</a>
+      <a href="mailto:info@zetaclinic.co.bw" data-h>✉️ info@zetaclinic.co.bw</a>
+      <a href="https://zetaclinic.setmore.com/book" target="_blank" data-h>🗓 Book Online</a>
+    </div>
+    <div class="fc">
+      <h5>Quick Links</h5>
+      <a href="#services" data-h>Services</a>
+      <a href="#team" data-h>Specialists</a>
+      <a href="#bk" data-h>Book Appointment</a>
+      <a href="#contact" data-h>Contact</a>
+    </div>
+  </div>
+  <div class="fb">
+    <p>© 2025 Zeta Clinic. All rights reserved.</p>
+    <a href="mailto:info@zetaclinic.co.bw">info@zetaclinic.co.bw</a>
+  </div>
+</footer>
+
+<!-- ══ MODAL ══════════════════════════════════════════ -->
+<div class="mo" id="modal">
+  <div class="mb">
+    <button class="mc" onclick="closeM()">×</button>
+    <h3 class="mn" id="mN"></h3>
+    <p class="mr" id="mR"></p>
+    <p class="mbi" id="mB"></p>
+    <a href="https://zetaclinic.setmore.com/book" class="ma" data-h target="_blank">Book Appointment ›</a>
+  </div>
+</div>
+
+<script>
+/* ── LOADER ─────────────────────────────────────────── */
+const loader = document.getElementById('loader');
+// pause hero animations until loader exits
+document.querySelectorAll('.w,.hpill,.hcta').forEach(el=>{
+  el.style.animationPlayState='paused';
+});
+setTimeout(()=>{
+  loader.classList.add('hide');
+  setTimeout(()=>{
+    loader.style.display='none';
+    // resume hero
+    document.querySelectorAll('.w,.hpill,.hcta').forEach(el=>{
+      el.style.animationPlayState='running';
+    });
+  },800);
+},4800);
+
+/* ── CURSOR ──────────────────────────────────────────── */
+const cur=document.getElementById('cur');
+let mx=-100,my=-100,cx=-100,cy=-100;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function loop(){cx+=(mx-cx)*.13;cy+=(my-cy)*.13;cur.style.left=cx+'px';cur.style.top=cy+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('[data-h],button,a,.sc2,.dc').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur.classList.add('big'));
+  el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
+});
+
+/* ── NAV SCROLL ──────────────────────────────────────── */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('sc',scrollY>60),{passive:true});
+
+/* ── HAMBURGER ───────────────────────────────────────── */
+const ham=document.getElementById('ham');
+const mob=document.getElementById('mobMenu');
+let open=false;
+function toggleMenu(v){
+  open=(v!==undefined)?v:!open;
+  ham.classList.toggle('open',open);
+  mob.style.display=open?'flex':'none';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>mob.classList.toggle('open',open)));
+  document.body.style.overflow=open?'hidden':'';
+}
+ham.addEventListener('click',()=>toggleMenu());
+mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>toggleMenu(false)));
+
+/* ── NAV ACTIVE ──────────────────────────────────────── */
+const nmap={home:'nl-home',services:'nl-svc',team:'nl-team',contact:'nl-con',bk:'nl-con'};
+document.querySelectorAll('#home,#services,#team,#bk,#contact').forEach(s=>{
+  if(!s)return;
+  new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting)return;
+      document.querySelectorAll('.nlw li a,.mob-menu .ml').forEach(a=>a.classList.remove('active'));
+      const k=nmap[e.target.id];
+      if(k){
+        document.getElementById(k)?.classList.add('active');
+        const mm={home:'mm-home',services:'mm-svc',team:'mm-team'}[e.target.id];
+        if(mm)document.getElementById(mm)?.classList.add('active');
+      }
+    });
+  },{threshold:0.3}).observe(s);
+});
+
+/* ── REVEAL ──────────────────────────────────────────── */
+new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
+},{threshold:0.1}).observe && document.querySelectorAll('.rev,.revL,.revR').forEach(el=>{
+  new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
+  },{threshold:0.1}).observe(el);
+});
+
+/* ── SERVICES INTERACTIVE ────────────────────────────── */
+const scards=document.querySelectorAll('.sc2');
+const simgs=document.querySelectorAll('.siw img');
+const sdc=document.getElementById('sdc');
+const svv=document.getElementById('svv');
+
+function activateSvc(card){
+  const idx=+card.dataset.idx;
+  scards.forEach(c=>c.classList.remove('active'));
+  card.classList.add('active');
+  simgs.forEach(img=>{img.classList.remove('visible');img.classList.add('hidden')});
+  simgs[idx].classList.remove('hidden');
+  simgs[idx].classList.add('visible');
+  sdc.classList.add('fading');
+  setTimeout(()=>{sdc.textContent=card.dataset.desc;sdc.classList.remove('fading')},260);
+}
+scards.forEach(c=>{
+  c.addEventListener('mouseenter',()=>activateSvc(c));
+  c.addEventListener('click',()=>activateSvc(c));
+});
+
+/* services entrance — fires as soon as 5% visible */
+new IntersectionObserver((entries,obs)=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    scards.forEach((c,i)=>{
+      const d=60+i*90;
+      c.style.transitionDelay=d+'ms';
+      c.style.transition=`opacity .6s ${d}ms cubic-bezier(.34,1.56,.64,1),
+        transform .6s ${d}ms cubic-bezier(.34,1.56,.64,1),
+        background .4s, border-color .3s, box-shadow .4s`;
+      setTimeout(()=>{
+        c.classList.add('entered');
+        setTimeout(()=>{c.style.transitionDelay='0ms'},700+i*90);
+      },d);
+    });
+    svv.style.transition='opacity .65s 200ms cubic-bezier(.25,.46,.45,.94), transform .65s 200ms cubic-bezier(.34,1.56,.64,1)';
+    setTimeout(()=>{svv.classList.add('entered');svv.style.transitionDelay='0ms'},200);
+    obs.disconnect();
+  });
+},{threshold:0.05,rootMargin:'0px 0px -30px 0px'}).observe(document.getElementById('services'));
+
+/* ── TEAM ENTRANCE ───────────────────────────────────── */
+const th2=document.getElementById('th2');
+const thp=document.getElementById('thp');
+const dcards=document.querySelectorAll('.dc');
+new IntersectionObserver((entries,obs)=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    th2.classList.add('in');
+    thp.classList.add('in');
+    dcards.forEach((c,i)=>{
+      const d=80+i*110;
+      c.style.transitionDelay=d+'ms';
+      setTimeout(()=>{
+        c.classList.add('in');
+        setTimeout(()=>{c.style.transitionDelay='0ms'},750+i*110);
+      },d);
+    });
+    obs.disconnect();
+  });
+},{threshold:0.05,rootMargin:'0px 0px -30px 0px'}).observe(document.getElementById('team'));
+
+/* ── MODAL ───────────────────────────────────────────── */
+const doctors={
+  passmore:{n:"Passmore Shambahweta",r:"Physiotherapist",b:"Passmore Shambahweta is a dedicated Physiotherapist at Zeta Clinic with a proven track record in community health. Formerly known for his work in the Mahalapye district, he combines clinical precision with a patient-first philosophy. He specializes in musculoskeletal recovery, sports injury management, and advanced techniques like Shock Wave Therapy and Dry Needling."},
+  laone:{n:"Dr. Laone Paphane-Nyambe",r:"Dental Surgeon",b:"Dr. Laone Paphane-Nyambe is a premier Dental Surgeon focused on merging clinical excellence with a refined patient experience. Practicing in Gaborone's CBD, she focuses on comprehensive oral rehabilitation and aesthetic enhancement, utilizing modern dental technology to ensure world-class care for families and corporate executives."},
+  victor:{n:"Victor S. Malindi",r:"Ultrasonographer",b:"Victor S. Malindi is our expert Ultrasonographer specializing in diagnostic medical imaging. He provides essential ultrasound consultations at Zeta Clinic to support specialized medical care across all departments with a focus on patient comfort and accuracy."},
+  mpho:{n:"Mpho Abel Thula",r:"Psychiatrist",b:"Mpho Abel Thula is a dedicated Psychiatrist providing comprehensive psychiatric evaluations and professional mental health support. He utilizes a personalized approach to help every patient achieve optimal mental wellness through expert clinical guidance."}
+};
+function openM(id){
+  const d=doctors[id];
+  document.getElementById('mN').textContent=d.n;
+  document.getElementById('mR').textContent=d.r;
+  document.getElementById('mB').textContent=d.b;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeM(){
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeM()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM()});
+</script>
+</body>
+</html>
