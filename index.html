@@ -17,7 +17,7 @@
 }
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none;background:#fff;color:var(--ch)}
-
+ 
 /* ═══ LOADER ════════════════════════════════════════ */
 #loader{
   position:fixed;inset:0;z-index:10000;
@@ -59,7 +59,7 @@ body{font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none;background:#
   animation:ldBar 4.6s .2s cubic-bezier(.4,0,.2,1) forwards;
 }
 @keyframes ldBar{0%{width:0%}60%{width:75%}90%{width:95%}100%{width:100%}}
-
+ 
 /* ═══ CURSOR ════════════════════════════════════════ */
 #cur{
   position:fixed;width:12px;height:12px;
@@ -70,7 +70,7 @@ body{font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none;background:#
   transition:width .28s cubic-bezier(.34,1.56,.64,1),height .28s cubic-bezier(.34,1.56,.64,1);
 }
 #cur.big{width:50px;height:50px}
-
+ 
 /* ═══ NAV ═══════════════════════════════════════════ */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:500;
@@ -94,7 +94,7 @@ nav.sc .nlw li a.active{background:rgba(242,113,33,.12);color:var(--or)}
 nav.sc .nlw li a:hover{color:var(--or)}
 nav.sc .bkb{background:var(--or)}
 .lp,.nlw,.bkb,.ham{pointer-events:all}
-
+ 
 .lp{
   display:flex;align-items:center;gap:10px;text-decoration:none;
   background:rgba(0,0,0,.42);backdrop-filter:blur(14px);
@@ -111,7 +111,7 @@ nav.sc .bkb{background:var(--or)}
 .li::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.28),transparent 70%)}
 .li img{width:22px;height:22px;object-fit:contain;position:relative;z-index:1;border-radius:0}
 .lp span{color:#fff;font-weight:800;font-size:.9rem;letter-spacing:.1em;transition:color .4s}
-
+ 
 .nlw{
   display:flex;align-items:center;list-style:none;
   background:rgba(0,0,0,.42);backdrop-filter:blur(14px);
@@ -127,7 +127,7 @@ nav.sc .bkb{background:var(--or)}
 }
 .nlw li a:hover{color:#fff;transform:translateY(-1px)}
 .nlw li a.active{background:var(--gr);color:#fff}
-
+ 
 .bkb{
   background:var(--or);color:#fff;text-decoration:none;
   padding:10px 22px;border-radius:30px;
@@ -136,7 +136,7 @@ nav.sc .bkb{background:var(--or)}
   box-shadow:0 4px 18px rgba(242,113,33,.4);
 }
 .bkb:hover{transform:scale(1.06) translateY(-2px);box-shadow:0 10px 30px rgba(242,113,33,.5)}
-
+ 
 /* hamburger */
 .ham{
   display:none;flex-direction:column;justify-content:center;gap:5px;
@@ -157,7 +157,7 @@ nav.sc .ham span{background:var(--ch)}
 .ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .ham.open span:nth-child(2){opacity:0;transform:scaleX(0)}
 .ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-
+ 
 /* mobile drawer */
 .mob-menu{
   display:none;position:fixed;inset:0;z-index:400;
@@ -193,7 +193,7 @@ nav.sc .ham span{background:var(--ch)}
   transition:transform .35s cubic-bezier(.34,1.56,.64,1) !important;
 }
 .mob-menu .mbk:hover{transform:scale(1.06) translateY(-2px) !important}
-
+ 
 /* ═══ SECTIONS ══════════════════════════════════════ */
 .fs{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
 .sb{position:absolute;inset:0;background-size:cover;background-position:center;animation:sZoom 20s ease-in-out infinite alternate}
@@ -201,10 +201,11 @@ nav.sc .ham span{background:var(--ch)}
 .so{position:absolute;inset:0}
 .grn{
   position:absolute;inset:0;opacity:.05;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:200px 200px;animation:grn .12s steps(1) infinite;
 }
 @keyframes grn{0%{background-position:0 0}25%{background-position:-40px 20px}50%{background-position:20px -35px}75%{background-position:-20px 40px}}
-
+ 
 /* blobs */
 .blob{position:absolute;border-radius:50%;pointer-events:none}
 #home .bOL{width:200px;height:220px;background:rgba(200,60,10,.65);left:-40px;bottom:80px;border-radius:60% 40% 55% 45%}
@@ -216,10 +217,11 @@ nav.sc .ham span{background:var(--ch)}
 #team .bOT{width:280px;height:200px;background:rgba(242,113,33,.75);right:-20px;top:120px;border-radius:40% 60% 50% 50%}
 #team .bOM{width:200px;height:200px;background:rgba(242,113,33,.6);right:60px;top:340px}
 #team .bTT{width:160px;height:180px;background:rgba(100,160,140,.5);right:100px;top:180px;border-radius:45% 55% 60% 40%}
-
+ 
 /* ═══ HOME ══════════════════════════════════════════ */
+#home .sb{background-image:url('hero%20bg.png');background-position:center top}
 #home .so{background:linear-gradient(135deg,rgba(220,80,15,.80) 0%,rgba(195,60,12,.70) 40%,rgba(160,44,8,.62) 100%)}
-
+ 
 .hi{
   position:relative;z-index:3;width:100%;
   display:flex;flex-direction:column;align-items:center;
@@ -243,7 +245,7 @@ nav.sc .ham span{background:var(--ch)}
 .hi h1 .w:nth-child(3){animation-delay:.34s}
 .hi h1 .w:nth-child(4){animation-delay:.48s}
 @keyframes wIn{to{opacity:1;transform:translateY(0) rotate(0)}}
-
+ 
 .hpill{
   background:rgba(140,198,63,.52);backdrop-filter:blur(14px) saturate(1.5);
   border-radius:50px;padding:16px 44px;
@@ -272,24 +274,25 @@ nav.sc .ham span{background:var(--ch)}
 .hcta::after{content:'';position:absolute;inset:-5px;border-radius:60px;border:2px solid rgba(140,198,63,.5);opacity:0;animation:pring 2.5s 2s ease-out infinite}
 @keyframes pring{0%{transform:scale(.93);opacity:.5}100%{transform:scale(1.15);opacity:0}}
 @keyframes upIn{to{opacity:1;transform:translateY(0)}}
-
+ 
 .shr{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;animation:fdi .5s 1.6s forwards}
 @keyframes fdi{to{opacity:.5}}
 .shr span{color:#fff;font-size:.62rem;letter-spacing:.2em;font-weight:700;text-transform:uppercase}
 .sph{width:22px;height:36px;border:2px solid rgba(255,255,255,.5);border-radius:12px;display:flex;justify-content:center;padding-top:6px}
 .sph::after{content:'';width:4px;height:8px;background:#fff;border-radius:2px;animation:sdt 1.7s ease-in-out infinite}
 @keyframes sdt{0%,100%{transform:translateY(0);opacity:1}80%{transform:translateY(10px);opacity:0}}
-
+ 
 /* ═══ SERVICES ══════════════════════════════════════ */
+#services .sb{background-image:url('services%20bg.png');filter:brightness(.42) saturate(.55)}
 #services .so{background:linear-gradient(135deg,rgba(18,42,28,.78) 0%,rgba(24,52,35,.60) 55%,rgba(30,60,40,.50) 100%)}
-
+ 
 .svi{
   position:relative;z-index:3;width:100%;
   display:grid;grid-template-columns:1fr 1fr;
   align-items:center;padding:120px 8% 80px;gap:56px;
 }
 .svl{display:flex;flex-direction:column;gap:14px}
-
+ 
 .sc2{
   background:rgba(80,130,40,.72);backdrop-filter:blur(12px) saturate(1.3);
   border-radius:16px;padding:18px 22px;cursor:none;
@@ -314,7 +317,7 @@ nav.sc .ham span{background:var(--ch)}
 .sc2 h3{color:var(--gr);font-size:1.1rem;font-weight:800;margin-bottom:5px;transition:letter-spacing .3s,color .3s}
 .sc2:hover h3,.sc2.active h3{letter-spacing:.02em;color:#fff}
 .sc2 p{color:rgba(255,255,255,.88);font-size:.9rem;line-height:1.55}
-
+ 
 .svv{
   display:flex;flex-direction:column;gap:14px;
   opacity:0;transform:translateX(30px);
@@ -338,10 +341,11 @@ nav.sc .ham span{background:var(--ch)}
   transition:opacity .3s cubic-bezier(.25,.46,.45,.94),transform .35s cubic-bezier(.34,1.56,.64,1);
 }
 .sdc.fading{opacity:0;transform:translateY(7px)}
-
+ 
 /* ═══ TEAM ══════════════════════════════════════════ */
+#team .sb{background-image:url('team%20bg.png');background-position:center right}
 #team .so{background:linear-gradient(100deg,rgba(230,100,20,.72) 0%,rgba(210,80,15,.60) 45%,rgba(160,50,10,.45) 100%)}
-
+ 
 .ti{position:relative;z-index:3;width:100%;padding:120px 8% 80px;display:flex;flex-direction:column}
 .th{max-width:460px;margin-bottom:56px}
 .th h2{
@@ -358,9 +362,9 @@ nav.sc .ham span{background:var(--ch)}
   transition:opacity .7s .22s cubic-bezier(.25,.46,.45,.94),transform .7s .22s cubic-bezier(.34,1.56,.64,1);
 }
 .th p.in{opacity:1;transform:translateX(0)}
-
+ 
 .tg{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:end}
-
+ 
 .dc{
   border-radius:22px;overflow:hidden;cursor:none;position:relative;
   background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.28);
@@ -393,7 +397,7 @@ nav.sc .ham span{background:var(--ch)}
 .dc:hover .di{padding:56px 18px 20px}
 .di .dn{color:#fff;font-size:.84rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;line-height:1.3;margin-bottom:4px;text-shadow:0 1px 12px rgba(0,0,0,.5)}
 .di .dr{color:rgba(255,255,255,.90);font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,.4)}
-
+ 
 /* ═══ BOOKING ═══════════════════════════════════════ */
 #bk{
   background:linear-gradient(135deg,#1a1a1a 0%,#2d1a0e 50%,#1a1a1a 100%);
@@ -426,7 +430,7 @@ nav.sc .ham span{background:var(--ch)}
 .bkbtn:hover .arr{transform:translateX(5px)}
 .bkbtn::after{content:'';position:absolute;inset:-5px;border-radius:60px;border:2px solid rgba(242,113,33,.5);opacity:0;animation:pring2 2.8s 1.5s ease-out infinite}
 @keyframes pring2{0%{transform:scale(.94);opacity:.5}100%{transform:scale(1.15);opacity:0}}
-
+ 
 /* ═══ FOOTER ════════════════════════════════════════ */
 footer{background:#111;padding:80px 8% 40px}
 .ftp{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:50px;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,.08)}
@@ -438,7 +442,7 @@ footer{background:#111;padding:80px 8% 40px}
 .fb p{color:rgba(255,255,255,.28);font-size:.78rem}
 .fb a{color:rgba(255,255,255,.28);text-decoration:none;font-size:.78rem;transition:color .2s}
 .fb a:hover{color:var(--or)}
-
+ 
 /* ═══ MODAL ═════════════════════════════════════════ */
 .mo{
   display:none;position:fixed;inset:0;z-index:800;
@@ -466,7 +470,7 @@ footer{background:#111;padding:80px 8% 40px}
   box-shadow:0 8px 24px rgba(242,113,33,.35);
 }
 .ma:hover{transform:scale(1.05) translateY(-2px);box-shadow:0 14px 36px rgba(242,113,33,.48)}
-
+ 
 /* reveal util */
 .rev{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.34,1.56,.64,1)}
 .rev.in{opacity:1;transform:translateY(0)}
@@ -474,7 +478,7 @@ footer{background:#111;padding:80px 8% 40px}
 .revL.in{opacity:1;transform:translateX(0)}
 .revR{opacity:0;transform:translateX(30px);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.34,1.56,.64,1)}
 .revR.in{opacity:1;transform:translateX(0)}
-
+ 
 /* ═══ MOBILE ════════════════════════════════════════ */
 @media(max-width:768px){
   #cur{display:none}
@@ -484,7 +488,7 @@ footer{background:#111;padding:80px 8% 40px}
   nav.sc{padding:10px 18px}
   .nlw,.bkb{display:none}
   .ham{display:flex}
-
+ 
   /* home */
   .hi{padding:105px 20px 72px;gap:18px}
   .hi h1{font-size:clamp(2.9rem,13.5vw,4.6rem)}
@@ -496,7 +500,7 @@ footer{background:#111;padding:80px 8% 40px}
   #home .bOL{width:90px;height:100px;left:-16px;bottom:52px}
   #home .bOB{width:65px;height:65px;left:42px;bottom:-6px}
   .shr{display:none}
-
+ 
   /* services */
   .svi{display:flex;flex-direction:column;padding:90px 20px 52px;gap:14px}
   .svv{display:flex !important;flex-direction:column;order:-1;opacity:1 !important;transform:none !important;transition:none !important}
@@ -508,7 +512,7 @@ footer{background:#111;padding:80px 8% 40px}
   .sc2 p{font-size:.82rem;line-height:1.45}
   #services .bCL{width:100px;height:100px;left:-36px;bottom:36px}
   #services .bCL2{width:70px;height:70px;left:44px;bottom:-18px}
-
+ 
   /* team */
   #team .sb{background-position:68% center}
   .ti{padding:90px 20px 52px}
@@ -529,7 +533,7 @@ footer{background:#111;padding:80px 8% 40px}
   #team .bOT{width:110px;height:82px;right:-8px;top:64px}
   #team .bOM{width:78px;height:78px;right:18px;top:162px}
   #team .bTT{width:60px;height:68px;right:36px;top:95px}
-
+ 
   /* booking */
   #bk{flex-direction:column;text-align:center;padding:72px 20px;gap:32px}
   .bkh{font-size:clamp(1.9rem,9vw,2.6rem)}
@@ -538,13 +542,13 @@ footer{background:#111;padding:80px 8% 40px}
   .hb{flex:1;min-width:120px;text-align:center;padding:12px 14px}
   .hb .tm{font-size:.88rem}
   .bkbtn{padding:15px 36px;font-size:.92rem;width:100%;max-width:290px;justify-content:center}
-
+ 
   /* footer */
   footer{padding:52px 20px 28px}
   .ftp{grid-template-columns:1fr;gap:28px;padding-bottom:32px}
   .fbr p{max-width:100%}
   .fb{flex-direction:column;text-align:center;gap:5px}
-
+ 
   /* modal — bottom sheet */
   .mo{align-items:flex-end;padding:0}
   .mb{border-radius:24px 24px 0 0;padding:32px 22px 36px;max-width:100%;max-height:88svh;overflow-y:auto;animation:mInM .42s cubic-bezier(.34,1.56,.64,1) both}
@@ -572,20 +576,20 @@ footer{background:#111;padding:80px 8% 40px}
 </style>
 </head>
 <body>
-
+ 
 <!-- LOADER -->
 <div id="loader">
-  <div class="ld-icon">
-  </div>
+  <div class="ld-icon"><img src="logo.png" alt="Zeta Clinic"/></div>
   <div class="ld-name">ZETA CLINIC</div>
   <div class="ld-bar"></div>
 </div>
-
+ 
 <div id="cur"></div>
-
+ 
 <!-- NAV -->
 <nav id="nav">
   <a href="#home" class="lp" data-h>
+    <div class="li"><img src="logo.png" alt="Z"/></div>
     <span>ZETA CLINIC</span>
   </a>
   <ul class="nlw">
@@ -597,7 +601,7 @@ footer{background:#111;padding:80px 8% 40px}
   <a href="https://zetaclinic.setmore.com/book" class="bkb" data-h target="_blank">BOOK NOW</a>
   <button class="ham" id="ham"><span></span><span></span><span></span></button>
 </nav>
-
+ 
 <!-- MOBILE MENU -->
 <div class="mob-menu" id="mobMenu">
   <a href="#home"     class="ml active" id="mm-home">HOME</a>
@@ -606,7 +610,7 @@ footer{background:#111;padding:80px 8% 40px}
   <a href="#contact"  class="ml"        id="mm-con">CONTACT</a>
   <a href="https://zetaclinic.setmore.com/book" class="ml mbk" target="_blank">BOOK NOW ›</a>
 </div>
-
+ 
 <!-- ══ HOME ══════════════════════════════════════════ -->
 <section class="fs" id="home">
   <div class="sb"></div><div class="so"></div><div class="grn"></div>
@@ -619,7 +623,7 @@ footer{background:#111;padding:80px 8% 40px}
   </div>
   <div class="shr"><div class="sph"></div><span>Scroll</span></div>
 </section>
-
+ 
 <!-- ══ SERVICES ══════════════════════════════════════ -->
 <section class="fs" id="services">
   <div class="sb"></div><div class="so"></div><div class="grn"></div>
@@ -650,7 +654,7 @@ footer{background:#111;padding:80px 8% 40px}
     </div>
   </div>
 </section>
-
+ 
 <!-- ══ TEAM ═══════════════════════════════════════════ -->
 <section class="fs" id="team">
   <div class="sb"></div><div class="so"></div><div class="grn"></div>
@@ -661,22 +665,26 @@ footer{background:#111;padding:80px 8% 40px}
       <p id="thp">Click on any specialist to<br>read their full professional profile.</p>
     </div>
     <div class="tg">
-      <div class="dc" src="victor.jpg"">
+      <div class="dc" onclick="openM('victor')"><img class="dp" src="victor.png" alt="Victor Malindi"/>
+        <img class="dp" src="http://file.garden/ab7plFUtJR_vAmJv/3.png" alt="Victor Malindi"/>
         <div class="di"><div class="dn">Victor S. Malindi</div><div class="dr">Ultrasonographer</div></div>
       </div>
       <div class="dc feat" onclick="openM('laone')" style="margin-top:-30px">
+        <img class="dp" src="laone.png" alt="Dr Laone"/>
         <div class="di"><div class="dn">Dr. Laone Paphane-Nyambe</div><div class="dr">Dental Surgeon</div></div>
       </div>
-      <div class="dc" onclick="openM('mpho')">
+      <div class="dc" onclick="openM('mpho')"><img class="dp" src="mpho.png" alt="Mpho Thula"/>
+        <img class="dp" src="https://avatar.anywhere.app/files/img/fS1xoifc99uO/profilepic.png" alt="Mpho Thula"/>
         <div class="di"><div class="dn">Mpho Abel Thula</div><div class="dr">Psychiatrist</div></div>
       </div>
-      <div class="dc" onclick="openM('passmore')">
+      <div class="dc" onclick="openM('passmore')"><img class="dp" src="passmore.png" alt="Passmore"/>
+        <img class="dp" src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&q=80&fit=crop&crop=face" alt="Passmore"/>
         <div class="di"><div class="dn">Passmore Shambahweta</div><div class="dr">Physiotherapist</div></div>
       </div>
     </div>
   </div>
 </section>
-
+ 
 <!-- ══ BOOKING ════════════════════════════════════════ -->
 <div id="bk">
   <div class="bkt revL">
@@ -692,12 +700,13 @@ footer{background:#111;padding:80px 8% 40px}
     <a href="https://zetaclinic.setmore.com/book" class="bkbtn" data-h target="_blank">Book Now <span class="arr">›</span></a>
   </div>
 </div>
-
+ 
 <!-- ══ FOOTER ═════════════════════════════════════════ -->
 <footer id="contact">
   <div class="ftp">
     <div class="fbr">
       <a href="#home" class="lp" data-h style="display:inline-flex">
+        <div class="li"><img src="logo.png" alt="Z"/></div>
         <span>ZETA CLINIC</span>
       </a>
       <p>Expert specialized medical care in the heart of Gaborone CBD. Physiotherapy, Psychiatry, Dental, and Ultrasound — all in one place.</p>
@@ -725,7 +734,7 @@ footer{background:#111;padding:80px 8% 40px}
     <a href="/cdn-cgi/l/email-protection#553c3b333a152f30213436393c3b3c367b363a7b3722"><span class="__cf_email__" data-cfemail="e58c8b838aa59f80918486898c8b8c86cb868acb8792">[email&#160;protected]</span></a>
   </div>
 </footer>
-
+ 
 <!-- ══ MODAL ══════════════════════════════════════════ -->
 <div class="mo" id="modal">
   <div class="mb">
@@ -736,7 +745,7 @@ footer{background:#111;padding:80px 8% 40px}
     <a href="https://zetaclinic.setmore.com/book" class="ma" data-h target="_blank">Book Appointment ›</a>
   </div>
 </div>
-
+ 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ── LOADER ─────────────────────────────────────────── */
 const loader = document.getElementById('loader');
@@ -754,7 +763,7 @@ setTimeout(()=>{
     });
   },800);
 },4800);
-
+ 
 /* ── CURSOR ──────────────────────────────────────────── */
 const cur=document.getElementById('cur');
 let mx=-100,my=-100,cx=-100,cy=-100;
@@ -764,11 +773,11 @@ document.querySelectorAll('[data-h],button,a,.sc2,.dc').forEach(el=>{
   el.addEventListener('mouseenter',()=>cur.classList.add('big'));
   el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
 });
-
+ 
 /* ── NAV SCROLL ──────────────────────────────────────── */
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('sc',scrollY>60),{passive:true});
-
+ 
 /* ── HAMBURGER ───────────────────────────────────────── */
 const ham=document.getElementById('ham');
 const mob=document.getElementById('mobMenu');
@@ -782,7 +791,7 @@ function toggleMenu(v){
 }
 ham.addEventListener('click',()=>toggleMenu());
 mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>toggleMenu(false)));
-
+ 
 /* ── NAV ACTIVE ──────────────────────────────────────── */
 const nmap={home:'nl-home',services:'nl-svc',team:'nl-team',contact:'nl-con',bk:'nl-con'};
 document.querySelectorAll('#home,#services,#team,#bk,#contact').forEach(s=>{
@@ -800,7 +809,7 @@ document.querySelectorAll('#home,#services,#team,#bk,#contact').forEach(s=>{
     });
   },{threshold:0.3}).observe(s);
 });
-
+ 
 /* ── REVEAL ──────────────────────────────────────────── */
 new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
@@ -809,13 +818,13 @@ new IntersectionObserver(entries=>{
     entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
   },{threshold:0.1}).observe(el);
 });
-
+ 
 /* ── SERVICES INTERACTIVE ────────────────────────────── */
 const scards=document.querySelectorAll('.sc2');
 const simgs=document.querySelectorAll('.siw img');
 const sdc=document.getElementById('sdc');
 const svv=document.getElementById('svv');
-
+ 
 function activateSvc(card){
   const idx=+card.dataset.idx;
   scards.forEach(c=>c.classList.remove('active'));
@@ -830,7 +839,7 @@ scards.forEach(c=>{
   c.addEventListener('mouseenter',()=>activateSvc(c));
   c.addEventListener('click',()=>activateSvc(c));
 });
-
+ 
 /* services entrance — fires as soon as 5% visible */
 new IntersectionObserver((entries,obs)=>{
   entries.forEach(e=>{
@@ -851,7 +860,7 @@ new IntersectionObserver((entries,obs)=>{
     obs.disconnect();
   });
 },{threshold:0.05,rootMargin:'0px 0px -30px 0px'}).observe(document.getElementById('services'));
-
+ 
 /* ── TEAM ENTRANCE ───────────────────────────────────── */
 const th2=document.getElementById('th2');
 const thp=document.getElementById('thp');
@@ -872,7 +881,7 @@ new IntersectionObserver((entries,obs)=>{
     obs.disconnect();
   });
 },{threshold:0.05,rootMargin:'0px 0px -30px 0px'}).observe(document.getElementById('team'));
-
+ 
 /* ── MODAL ───────────────────────────────────────────── */
 const doctors={
   passmore:{n:"Passmore Shambahweta",r:"Physiotherapist",b:"Passmore Shambahweta is a dedicated Physiotherapist at Zeta Clinic with a proven track record in community health. Formerly known for his work in the Mahalapye district, he combines clinical precision with a patient-first philosophy. He specializes in musculoskeletal recovery, sports injury management, and advanced techniques like Shock Wave Therapy and Dry Needling."},
@@ -897,3 +906,4 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM()});
 </script>
 </body>
 </html>
+ 
